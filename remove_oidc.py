@@ -56,10 +56,7 @@ def main(profile):
   """
   Do the work..
 
-  Order of operation:
-
-  1.) Delete Node Groups of EKS Cluster
-  2.) Delete EKS Cluster
+  - Delete OIDC providers
   """
 
   # AWS Credentials
@@ -83,7 +80,7 @@ def main(profile):
 def parse_command_line_option(argv):
 
   if len(argv) != 2:
-    print("Usage: python remove_iam.py <profile>")
+    print("Usage: python remove_oidc.py <profile>")
     sys.exit(2)
 
   profile = argv[1]
