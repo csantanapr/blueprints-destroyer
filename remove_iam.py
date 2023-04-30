@@ -1,6 +1,8 @@
 """
 
-Remove EKS Clusters.
+Remove IAM Resources
+
+This script removes IAM Resources for EKS Cluster.
 
 """
 
@@ -28,6 +30,7 @@ def delete_open_id_connect_providers(iam, open_id_connect_provider_arns):
 
   return
 
+
 def get_open_id_connect_providers(iam):
   """
   Get OpenID Connect Providers.
@@ -49,7 +52,7 @@ def get_open_id_connect_providers(iam):
 
 
 
-def main(profile, region):
+def main(profile):
   """
   Do the work..
 
@@ -63,24 +66,31 @@ def main(profile, region):
   # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html
 
   session = boto3.Session(profile_name=profile)
-  iam = session.client('iam', region_name=region)
+  # Initialize IAM Client
+  iam = session.client('iam')
 
+  open_id_connect_provider_arns = get_open_id_connect_providers(iam)
 
+  for open_id_connect_provider_arn in open_id_connect_provider_arns:
+    # Get the open id connect provider and print details
+    open_id_connect_provider = iam.get_open_id_connect_provider(
+      OpenIDConnectProviderArn=open_id_connect_provider_arn
+    )
+    delete_open_id_connect_providers(iam, [open_id_connect_provider_arn])
 
   return
 
 def parse_command_line_option(argv):
 
-  if len(argv) != 3:
-    print("Usage: python remove_eks.py <profile> <region>")
+  if len(argv) != 2:
+    print("Usage: python remove_iam.py <profile>")
     sys.exit(2)
 
   profile = argv[1]
-  region = argv[2]
 
-  print("Profile="+profile+", Region="+region)
+  print("Profile="+profile)
 
-  main(profile, region)
+  main(profile)
 
 
 if __name__ == "__main__":
