@@ -42,7 +42,7 @@ def main(profile, region):
   response = kms_client.list_aliases()['Aliases']
   for key in response:
     if 'eks' in key['AliasName']:
-      print("Deleting key alias: ",key)
+      print("Deleting key alias: ",key['AliasName'])
       kms_client.delete_alias(AliasName=key['AliasName'])
 
 
