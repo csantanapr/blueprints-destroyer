@@ -15,7 +15,8 @@ pip3 install -r requirements.txt
 python3 remove_eks.py <AWS_PROFILE> <AWS_REGION>
 python3 remove_vpc.py <AWS_PROFILE> <AWS_REGION>
 python3 remove_cloudwatch_logs.py <AWS_PROFILE> <AWS_REGION>
-python3 remove_oidc.py <AWS_PROFILE>
 python3 remove_kms.py <AWS_PROFILE> <AWS_REGION>
+python3 remove_oidc.py <AWS_PROFILE>
+python3 remove_iam.py <AWS_PROFILE>
 ```
 
