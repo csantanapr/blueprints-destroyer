@@ -1,4 +1,4 @@
-# Destroy EKS Blueprints
+# EKS Blueprints Destroyer
 
 Examples of boto3 python library to clean your AWS account when deploying [EKS Blueprints](https://github.com/aws-ia/terraform-aws-eks-blueprints)
 
